@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bright Minds Tuition</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#F5A623; --gold-light:#FFD07B; --gold-dark:#C67C00;
+  --teal:#0A7E8C; --teal-light:#12B0C2; --teal-pale:#E0F7FA;
+  --cream:#FFFDF5; --dark:#1A1A2E; --text:#2D3748; --muted:#718096;
+  --border:#E2E8F0;
+  --sh:0 4px 24px rgba(10,126,140,.10);
+  --sh-lg:0 12px 48px rgba(10,126,140,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(255,253,245,.96);backdrop-filter:blur(12px);border-bottom:2px solid var(--gold-light);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:70px;box-shadow:0 2px 16px rgba(245,166,35,.10)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--teal),var(--teal-light));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;font-weight:900}
+.logo-text{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--teal);line-height:1.2}
+.logo-text small{display:block;font-family:'DM Sans',sans-serif;font-size:.62rem;color:var(--gold-dark);font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text);font-size:.88rem;font-weight:500;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .2s;border-radius:2px}
+.nav-links a:hover{color:var(--teal)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;border:none;padding:10px 22px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 14px rgba(245,166,35,.35)}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(245,166,35,.45)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--teal);border-radius:2px;display:block}
+.mob-menu{display:none;position:fixed;top:70px;left:0;right:0;z-index:998;background:#fff;border-bottom:2px solid var(--gold-light);padding:20px 5%;box-shadow:0 10px 30px rgba(0,0,0,.10)}
+.mob-menu.open{display:block}
+.mob-menu ul{list-style:none;display:flex;flex-direction:column;gap:16px}
+.mob-menu ul li a{text-decoration:none;color:var(--text);font-size:1rem;font-weight:500;display:block;padding:4px 0}
+
+/* ── HERO ── */
+#home{min-height:100vh;background:linear-gradient(135deg,#0A7E8C 0%,#0d9aaa 40%,#12B0C2 70%,#1ec8dc 100%);position:relative;display:flex;align-items:center;overflow:hidden;padding-top:70px}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hc{position:absolute;border-radius:50%}
+.hc1{width:420px;height:420px;background:rgba(255,255,255,.06);top:-80px;right:-60px}
+.hc2{width:200px;height:200px;background:rgba(245,166,35,.13);bottom:80px;right:20%}
+.hc3{width:120px;height:120px;background:rgba(255,255,255,.07);top:40%;left:5%}
+.hstar{position:absolute;color:rgba(255,255,255,.18);font-size:1.8rem;animation:twinkle 3s infinite alternate}
+.hstar:nth-child(4){top:15%;left:12%;animation-delay:0s}
+.hstar:nth-child(5){top:60%;left:45%;animation-delay:1.2s;font-size:1rem}
+.hstar:nth-child(6){top:25%;right:25%;animation-delay:.6s;font-size:1.4rem}
+.hstar:nth-child(7){bottom:20%;left:30%;animation-delay:2s;font-size:.8rem}
+@keyframes twinkle{from{opacity:.2;transform:scale(1)}to{opacity:.8;transform:scale(1.3)}}
+.hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:60px 5%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-text{color:#fff}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);padding:6px 16px;border-radius:50px;margin-bottom:24px;font-size:.82rem;font-weight:500;animation:fD .8s ease both}
+.dot{width:8px;height:8px;background:var(--gold-light);border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.5);opacity:.7}}
+@keyframes fD{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fR{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+.hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;line-height:1.12;margin-bottom:20px;animation:fD .9s .1s ease both}
+.hero-text h1 em{font-style:italic;color:var(--gold-light)}
+.hero-text p{font-size:1.05rem;line-height:1.75;opacity:.9;margin-bottom:36px;animation:fD .9s .2s ease both}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fD .9s .3s ease both}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;border:none;padding:14px 32px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .25s;box-shadow:0 6px 20px rgba(245,166,35,.45);display:inline-block}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(245,166,35,.55)}
+.btn-wht{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);padding:14px 32px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .25s;display:inline-block}
+.btn-wht:hover{background:rgba(255,255,255,.15);border-color:#fff}
+.hero-stats{display:flex;gap:30px;margin-top:40px;animation:fD .9s .4s ease both;flex-wrap:wrap}
+.hstat .num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold-light)}
+.hstat .lbl{font-size:.78rem;opacity:.8;text-transform:uppercase;letter-spacing:.06em}
+.hero-card{background:rgba(255,255,255,.97);border-radius:24px;padding:36px;box-shadow:0 24px 60px rgba(0,0,0,.18);animation:fR 1s .3s ease both;position:relative}
+.hero-card::before{content:'';position:absolute;top:-2px;left:24px;right:24px;height:4px;background:linear-gradient(90deg,var(--gold),var(--teal-light));border-radius:0 0 4px 4px}
+.hero-card h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--teal);margin-bottom:20px;text-align:center}
+.qi{display:flex;align-items:center;gap:14px;background:var(--teal-pale);border-radius:12px;padding:12px 16px;margin-bottom:12px}
+.qi-ico{font-size:1.4rem;flex-shrink:0}
+.qi-lbl{font-size:.73rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+.qi-val{font-size:.92rem;font-weight:600;color:var(--dark)}
+
+/* ── SECTION COMMONS ── */
+section{padding:90px 5%}
+.stag{display:inline-flex;align-items:center;gap:8px;background:var(--teal-pale);color:var(--teal);padding:5px 14px;border-radius:50px;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:var(--dark);line-height:1.2;margin-bottom:12px}
+.stitle span{color:var(--teal)}
+.ssub{font-size:1rem;color:var(--muted);max-width:540px;line-height:1.7}
+.sh{margin-bottom:50px}
+.sh.c{text-align:center}
+.sh.c .ssub{margin:0 auto}
+.divider{width:56px;height:4px;margin:16px 0;background:linear-gradient(90deg,var(--gold),var(--teal-light));border-radius:4px}
+.divider.c{margin:16px auto}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── ABOUT ── */
+#about{background:#fff}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto}
+.about-img-wrap{position:relative}
+.about-img{background:linear-gradient(135deg,var(--teal),var(--teal-light));border-radius:24px;height:360px;display:flex;align-items:center;justify-content:center;font-size:7rem;box-shadow:var(--sh-lg);position:relative;overflow:hidden}
+.about-img::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='3' fill='white' fill-opacity='.06'/%3E%3C/svg%3E")}
+.about-badge{position:absolute;bottom:-18px;right:-18px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;padding:16px 20px;border-radius:16px;text-align:center;box-shadow:0 8px 24px rgba(245,166,35,.4)}
+.about-badge .num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;display:block}
+.about-badge .lbl{font-size:.72rem;font-weight:600;opacity:.9}
+.about-text p{font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:16px}
+.af{display:flex;align-items:center;gap:12px;font-size:.92rem;font-weight:500;margin-bottom:10px}
+.af-chk{width:24px;height:24px;background:linear-gradient(135deg,var(--teal),var(--teal-light));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;flex-shrink:0}
+
+/* ── COURSES ── */
+#courses{background:var(--cream)}
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;max-width:1100px;margin:0 auto}
+.ccard{background:#fff;border-radius:20px;padding:32px 24px;box-shadow:var(--sh);transition:transform .3s,box-shadow .3s;border:2px solid transparent;position:relative;overflow:hidden;cursor:default}
+.ccard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.ccard:nth-child(1)::before{background:linear-gradient(90deg,#0A7E8C,#12B0C2)}
+.ccard:nth-child(2)::before{background:linear-gradient(90deg,#F5A623,#FFD07B)}
+.ccard:nth-child(3)::before{background:linear-gradient(90deg,#E53E3E,#FC8181)}
+.ccard:nth-child(4)::before{background:linear-gradient(90deg,#38A169,#68D391)}
+.ccard:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);border-color:var(--teal-pale)}
+.c-ico{font-size:2.6rem;margin-bottom:16px;display:block}
+.ccard h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:10px;color:var(--dark)}
+.ccard p{font-size:.88rem;color:var(--muted);line-height:1.65}
+.ctag{display:inline-block;background:var(--teal-pale);color:var(--teal);font-size:.73rem;font-weight:700;padding:3px 10px;border-radius:50px;margin-top:14px}
+
+/* ── STAFF ── */
+#staff{background:#fff}
+.staff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;max-width:900px;margin:0 auto}
+.scard{background:var(--cream);border-radius:24px;padding:36px 28px;text-align:center;box-shadow:var(--sh);transition:transform .3s,box-shadow .3s;border:2px solid var(--border)}
+.scard:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);border-color:var(--teal-light)}
+.savatar{width:90px;height:90px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--teal),var(--teal-light));color:#fff;border:4px solid #fff;box-shadow:0 6px 20px rgba(10,126,140,.25)}
+.scard:nth-child(2) .savatar{background:linear-gradient(135deg,var(--gold-dark),var(--gold))}
+.scard h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.srole{font-size:.82rem;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
+.ssubjs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px}
+.ssubj{background:var(--teal-pale);color:var(--teal);font-size:.75rem;font-weight:600;padding:4px 12px;border-radius:50px}
+
+/* ── SCHEDULE ── */
+#schedule{background:linear-gradient(135deg,var(--teal) 0%,#0d9aaa 100%);position:relative;overflow:hidden}
+#schedule::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z' fill='white' fill-opacity='.04'/%3E%3C/svg%3E")}
+#schedule .stitle{color:#fff}
+#schedule .stag{background:rgba(255,255,255,.15);color:#fff}
+#schedule .divider{background:linear-gradient(90deg,var(--gold-light),#fff)}
+#schedule .ssub{color:rgba(255,255,255,.8)}
+.sc-wrap{max-width:800px;margin:0 auto;position:relative;z-index:1}
+.sc-card{background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:16px;transition:background .3s}
+.sc-card:hover{background:rgba(255,255,255,.18)}
+.sc-time{display:flex;align-items:center;gap:14px}
+.sc-ico{font-size:2rem}
+.sc-lbl{font-size:.75rem;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:4px}
+.sc-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#fff}
+.sc-days{display:flex;gap:8px;flex-wrap:wrap}
+.sday{background:var(--gold);color:#fff;padding:6px 14px;border-radius:50px;font-size:.8rem;font-weight:700}
+.sday.off{background:rgba(255,255,255,.15);color:rgba(255,255,255,.45)}
+
+/* ── ENROLL FORM ── */
+#enroll{background:var(--cream)}
+.form-wrap{max-width:760px;margin:0 auto;background:#fff;border-radius:28px;padding:48px 52px;box-shadow:var(--sh-lg);border:1px solid var(--border);position:relative;overflow:hidden}
+.form-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--gold),var(--teal-light),var(--gold))}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fg.full{grid-column:1/-1}
+.fg label{font-size:.85rem;font-weight:600;color:var(--text)}
+.fg label .req{color:#E53E3E}
+.fg input,.fg select,.fg textarea{padding:12px 16px;border:2px solid var(--border);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.92rem;color:var(--text);background:var(--cream);transition:border-color .2s,box-shadow .2s;outline:none;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--teal);background:#fff;box-shadow:0 0 0 4px rgba(10,126,140,.1)}
+.fg textarea{resize:vertical;min-height:90px}
+.f-submit{margin-top:28px;text-align:center}
+.f-submit button{background:linear-gradient(135deg,var(--teal),var(--teal-light));color:#fff;border:none;padding:15px 52px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(10,126,140,.35);transition:all .25s;letter-spacing:.02em}
+.f-submit button:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(10,126,140,.45)}
+.f-submit button:disabled{opacity:.7;cursor:not-allowed;transform:none}
+.success-msg{display:none;text-align:center;padding:28px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid #86efac;border-radius:16px;margin-top:20px}
+.s-ico{font-size:2.5rem;margin-bottom:10px}
+.success-msg h4{font-family:'Playfair Display',serif;font-size:1.3rem;color:#166534}
+.success-msg p{font-size:.88rem;color:#166534;opacity:.8;margin-top:6px}
+#summaryBox{margin-top:16px;text-align:left;background:#fff;border-radius:12px;padding:16px;font-size:.85rem;color:var(--text);line-height:1.8}
+.reset-btn{margin-top:16px;background:var(--teal);color:#fff;border:none;padding:10px 28px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.reset-btn:hover{background:var(--teal-light)}
+
+/* ── TESTIMONIALS ── */
+#testimonials{background:#fff}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1100px;margin:0 auto}
+.tcard{background:var(--cream);border-radius:20px;padding:28px;box-shadow:var(--sh);border:2px solid var(--border);transition:transform .3s,box-shadow .3s}
+.tcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.tquote{font-size:3rem;color:var(--gold-light);line-height:1;margin-bottom:10px;font-family:'Playfair Display',serif}
+.ttext{font-size:.92rem;line-height:1.7;color:var(--muted);margin-bottom:20px;font-style:italic}
+.tauthor{display:flex;align-items:center;gap:12px}
+.tav{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-light));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.95rem;flex-shrink:0}
+.tname{font-weight:600;font-size:.9rem;color:var(--dark)}
+.trole{font-size:.78rem;color:var(--muted)}
+.stars{color:var(--gold);font-size:.9rem;margin-bottom:12px}
+
+/* ── CONTACT ── */
+#contact{background:var(--cream)}
+.con-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;max-width:1000px;margin:0 auto;align-items:start}
+.con-card{background:#fff;border-radius:16px;padding:20px 24px;display:flex;align-items:flex-start;gap:16px;box-shadow:var(--sh);border:2px solid var(--border);transition:border-color .2s;margin-bottom:16px}
+.con-card:hover{border-color:var(--teal-light)}
+.con-ico{width:46px;height:46px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,var(--teal-pale),#b2ebf2);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.con-lbl{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:4px}
+.con-val{font-size:.95rem;font-weight:600;color:var(--dark)}
+.con-val a{color:var(--teal);text-decoration:none}
+.con-val a:hover{text-decoration:underline}
+.map-box{background:linear-gradient(135deg,var(--teal-pale),#b2ebf2);border-radius:20px;height:260px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;border:2px dashed var(--teal-light);margin-bottom:20px}
+.map-box .mico{font-size:3rem}
+.map-box p{font-size:.88rem;color:var(--teal);font-weight:500}
+.con-cta{background:linear-gradient(135deg,var(--teal),var(--teal-light));border-radius:16px;padding:24px;color:#fff;text-align:center}
+.con-cta h4{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:6px}
+.con-cta p{font-size:.85rem;opacity:.85;margin-bottom:16px}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);color:#fff;padding:50px 5% 30px}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px;max-width:1100px;margin:0 auto;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.1)}
+.ft-brand p{font-size:.88rem;opacity:.6;line-height:1.7;margin-top:14px;max-width:300px}
+.ft-col h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:16px;color:var(--gold-light)}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ft-col ul li a{text-decoration:none;color:rgba(255,255,255,.6);font-size:.88rem;transition:color .2s}
+.ft-col ul li a:hover{color:var(--gold-light)}
+.ft-bot{max-width:1100px;margin:24px auto 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.ft-bot p{font-size:.82rem;opacity:.5}
+.ft-logo{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ft-logo .fli{width:36px;height:36px;background:linear-gradient(135deg,var(--teal),var(--teal-light));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff}
+.ft-logo span{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#fff}
+
+/* ── SCROLL TOP ── */
+#scrollTop{position:fixed;bottom:28px;right:28px;z-index:998;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-light));color:#fff;border:none;cursor:pointer;font-size:1.2rem;box-shadow:0 4px 16px rgba(10,126,140,.4);display:none;align-items:center;justify-content:center;transition:transform .2s}
+#scrollTop:hover{transform:translateY(-3px)}
+#scrollTop.show{display:flex}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-card{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .con-grid{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .form-wrap{padding:32px 24px}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .fgrid{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column}
+  section{padding:70px 5%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">
+    <div class="logo-icon">✦</div>
+    <div class="logo-text">Bright Minds Tuition<small>Center of Excellence</small></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#staff">Staff</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#enroll">Enroll Now</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <ul>
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#courses" onclick="closeMenu()">Courses</a></li>
+    <li><a href="#staff" onclick="closeMenu()">Staff</a></li>
+    <li><a href="#schedule" onclick="closeMenu()">Schedule</a></li>
+    <li><a href="#testimonials" onclick="closeMenu()">Reviews</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    <li><a href="#enroll" onclick="closeMenu()" style="color:var(--teal);font-weight:700">✦ Enroll Now</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg">
+    <div class="hc hc1"></div>
+    <div class="hc hc2"></div>
+    <div class="hc hc3"></div>
+    <span class="hstar">✦</span>
+    <span class="hstar">★</span>
+    <span class="hstar">✦</span>
+    <span class="hstar">◆</span>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge"><span class="dot"></span> Enrollments Open for 2025–26</div>
+      <h1>Where <em>Knowledge</em> Meets <em>Excellence</em></h1>
+  
+      <p>Bright Minds Tuition offers focused, personalised academic coaching in a warm and supportive environment — nurturing every student to reach their full potential.</p>
+          <!-- Fees Highlight -->
+    <div style="
+      margin-top:20px;
+      padding:16px 24px;
+      background:linear-gradient(135deg,#fff8e1,#ffecb3);
+      border:2px solid #dfb86f;
+      border-radius:12px;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      font-family:'Playfair Display',serif;
+      font-weight:700;
+      font-size:1.2rem;
+      color:#000003;
+     ">
+        <span style="font-size:1.6rem;">💰</span> Monthly Fees: ₹1000
+     </div>
+     <br>
+     <br>
+      <div class="hero-btns">
+        <a class="btn-gold" href="#enroll">📋 Enroll a Student</a>
+        <a class="btn-wht" href="#courses">Explore Courses →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="num">4+</div><div class="lbl">Subjects</div></div>
+        <div class="hstat"><div class="num">2</div><div class="lbl">Expert Teachers</div></div>
+        <div class="hstat"><div class="num">100%</div><div class="lbl">Dedication</div></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>📌 Quick Info</h3>
+      <div class="qi"><span class="qi-ico">👩‍💼</span><div><div class="qi-lbl">Owner / Director</div><div class="qi-val">Ms. M. Thilothana</div></div></div>
+      <div class="qi"><span class="qi-ico">🕕</span><div><div class="qi-lbl">Class Timings</div><div class="qi-val">6:30 PM – 8:00 PM</div></div></div>
+      <div class="qi"><span class="qi-ico">📚</span><div><div class="qi-lbl">Courses Offered</div><div class="qi-val">CS · Tamil · English · Physics</div></div></div>
+      <div class="qi"><span class="qi-ico">👩‍🏫</span><div><div class="qi-lbl">Teaching Staff</div><div class="qi-val">Ms. M. Thilothana · Ms. K. Parkavi </div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <div class="about-img">🎓</div>
+        <div class="about-badge">
+          <span class="num">✦</span>
+          <span class="lbl">Excellence<br>in Teaching</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="sh">
+          <div class="stag">✦ About Us</div>
+          <h2 class="stitle">Empowering Students to <span>Shine Brighter</span></h2>
+          <div class="divider"></div>
+        </div>
+        <div class="about-text">
+          <p>Welcome to <strong>Bright Minds Tuition</strong> — a centre of academic excellence founded and led by <strong>Ms. M. Thilothana</strong>. We believe every student has unique potential, and our mission is to unlock it through personalised guidance and a nurturing learning atmosphere.</p>
+          <p>Our small-batch classes ensure every student receives individual attention. With experienced and passionate educators, we make learning engaging, structured, and effective.</p>
+          <div style="margin-top:20px">
+            <div class="af"><div class="af-chk">✓</div> Small batch sizes for focused, personal learning</div>
+            <div class="af"><div class="af-chk">✓</div> Experienced and caring teaching staff</div>
+            <div class="af"><div class="af-chk">✓</div> Curriculum aligned with board syllabus</div>
+            <div class="af"><div class="af-chk">✓</div> Regular assessments and progress tracking</div>
+            <div class="af"><div class="af-chk">✓</div> Convenient evening batch for school students</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="sh c reveal">
+      <div class="stag">📚 What We Teach</div>
+      <h2 class="stitle">Our <span>Courses</span> Offered</h2>
+      <div class="divider c"></div>
+      <p class="ssub">Comprehensive coaching in four core subjects, tailored to each student's level and board requirements.</p>
+    </div>
+    <div class="courses-grid">
+      <div class="ccard reveal">
+        <span class="c-ico">💻</span>
+        <h3>Computer Science</h3>
+        <p>Programming fundamentals, data structures, algorithms, and board-specific CS theory with hands-on practicals and problem solving.</p>
+        <span class="ctag">Theory + Practicals</span>
+      </div>
+      <div class="ccard reveal">
+        <span class="c-ico">📖</span>
+        <h3>Tamil</h3>
+        <p>Strengthening language skills including grammar, prose, poetry comprehension, creative writing, and classical literature.</p>
+        <span class="ctag">Language & Literature</span>
+      </div>
+      <div class="ccard reveal">
+        <span class="c-ico">🔤</span>
+        <h3>English</h3>
+        <p>Building communication skills through grammar, comprehension, essay writing, vocabulary, and spoken English practice.</p>
+        <span class="ctag">Grammar & Writing</span>
+      </div>
+      <div class="ccard reveal">
+        <span class="c-ico">⚛️</span>
+        <h3>Physics</h3>
+        <p>Conceptual and problem-solving classes covering mechanics, optics, electricity, magnetism, and modern physics topics.</p>
+        <span class="ctag">Concepts + Problems</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAFF -->
+<section id="staff">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="sh c reveal">
+      <div class="stag">👩‍🏫 Meet the Team</div>
+      <h2 class="stitle">Our <span>Teaching Staff</span></h2>
+      <div class="divider c"></div>
+      <p class="ssub">Passionate educators dedicated to your child's academic success and confidence.</p>
+    </div>
+    <div class="staff-grid">
+      <div class="scard reveal">
+        <div class="savatar">P</div>
+        <h3>Ms. K. Parkavi</h3>
+        <div class="srole">Senior Faculty</div>
+        <p style="font-size:.88rem;color:var(--muted);line-height:1.65">Highly experienced educator with a passion for making complex concepts simple and accessible. Known for engaging, interactive teaching methods.</p>
+        <div class="ssubjs">
+          <span class="ssubj">Tamil</span>
+          <span class="ssubj">English</span>
+        </div>
+      </div>
+      <div class="scard reveal">
+        <div class="savatar">T</div>
+        <h3>Ms. M. Thilothana</h3>
+        <div class="srole" style="color:var(--gold-dark)">Lead Faculty</div>
+        <p style="font-size:.88rem;color:var(--muted);line-height:1.65">Founder and lead instructor with a strong background in STEM. Committed to providing an enriching, results-driven learning journey for every student.</p>
+        <div class="ssubjs">
+          <span class="ssubj" style="background:#fff8e1;color:var(--gold-dark)">Computer Science</span>
+          <span class="ssubj" style="background:#fff8e1;color:var(--gold-dark)">Physics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <div class="sc-wrap">
+    <div class="sh c reveal">
+      <div class="stag">🕕 Class Timings</div>
+      <h2 class="stitle">Daily <span style="color:var(--gold-light)">Schedule</span></h2>
+      <div class="divider c"></div>
+      <p class="ssub">A convenient evening slot perfectly timed for school students.</p>
+    </div>
+    <div class="reveal">
+      <div class="sc-card">
+        <div class="sc-time">
+          <span class="sc-ico">🌆</span>
+          <div>
+            <div class="sc-lbl">Evening Batch</div>
+            <div class="sc-val">6:30 PM – 8:00 PM</div>
+          </div>
+        </div>
+        <div class="sc-days">
+          <span class="sday">Mon</span><span class="sday">Tue</span><span class="sday">Wed</span>
+          <span class="sday">Thu</span><span class="sday">Fri</span><span class="sday">Sat</span>
+          <span class="sday">Sun</span>
+        </div>
+      </div>
+      <div class="sc-card" style="opacity:.85">
+        <div class="sc-time">
+          <span class="sc-ico">📝</span>
+          <div>
+            <div class="sc-lbl">Session Duration</div>
+            <div class="sc-val">1:30 Hour per Session</div>
+          </div>
+        </div>
+        <div style="color:rgba(255,255,255,.75);font-size:.9rem">Register below to confirm your subject &amp; slot</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENROLL -->
+<section id="enroll">
+  <div style="max-width:900px;margin:0 auto">
+    <div class="sh c reveal">
+      <div class="stag">📋 Admissions Open</div>
+      <h2 class="stitle">Enroll Your <span>Child Today</span></h2>
+      <div class="divider c"></div>
+      <p class="ssub">Fill in the details below and we'll confirm your child's seat within 24 hours.</p>
+    </div>
+    <div class="form-wrap reveal">
+      <div class="fgrid" id="fgrid">
+        <div class="fg">
+          <label>Student's Full Name <span class="req">*</span></label>
+          <input type="text" id="sName" placeholder="e.g. Arun Kumar">
+        </div>
+        <div class="fg">
+          <label>Date of Birth</label>
+          <input type="date" id="sDob">
+        </div>
+        <div class="fg">
+          <label>Class / Grade <span class="req">*</span></label>
+          <select id="sGrade">
+            <option value="">— Select Grade —</option>
+            <option>Grade 6</option><option>Grade 7</option><option>Grade 8</option>
+            <option>Grade 9</option><option>Grade 10</option>
+            <option>Grade 11</option><option>Grade 12</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>School Name</label>
+          <input type="text" id="sSchool" placeholder="Student's current school">
+        </div>
+        <div class="fg">
+          <label>Subject <span class="req">*</span></label>
+          <select id="sSubject">
+            <option value="">— Select Subject —</option>
+            <option>Computer Science</option>
+            <option>Tamil</option>
+            <option>English</option>
+            <option>Physics</option>
+            <option>Multiple Subjects</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Time Slot <span class="req">*</span></label>
+          <select id="sSlot">
+            <option value="">— Select Time Slot —</option>
+            <option value="6:30 PM – 8:00 PM (Evening)">🕕 6:30 PM – 8:00 PM (Evening)</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Parent / Guardian Name <span class="req">*</span></label>
+          <input type="text" id="pName" placeholder="Parent or guardian's name">
+        </div>
+        <div class="fg">
+          <label>Contact Number <span class="req">*</span></label>
+          <input type="tel" id="pPhone" placeholder="+91 XXXXX XXXXX" maxlength="10"  inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+        </div>
+        <div class="fg">
+          <label>Email Address</label>
+          <input type="email" id="pEmail" placeholder="parent@email.com" maxlength="35">
+        </div>
+        <div class="fg">
+          <label>Residential Area</label>
+          <input type="text" id="pArea" placeholder="Your locality / area">
+        </div>
+        <div class="fg full">
+          <label>Additional Information</label>
+          <textarea id="sNotes" placeholder="Any special requirements, academic challenges, or questions..."></textarea>
+        </div>
+      </div>
+      <div class="f-submit" id="fSubmit">
+        <button onclick="submitForm()">✦ Submit Enrollment Request</button>
+      </div>
+      <div class="success-msg" id="successMsg">
+        <div class="s-ico">🎉</div>
+        <h4>Enrollment Request Submitted!</h4>
+        <p>Thank you! We've received your details and will contact you within 24 hours to confirm the seat.</p>
+        <div id="summaryBox"></div>
+        <button class="reset-btn" onclick="resetForm()">+ Register Another Student</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="sh c reveal">
+      <div class="stag">⭐ Parent Reviews</div>
+      <h2 class="stitle">What <span>Parents Say</span></h2>
+      <div class="divider c"></div>
+    </div>
+    <div class="tgrid">
+      <div class="tcard reveal">
+        <div class="stars">★★★★★</div>
+        <div class="tquote">"</div>
+        <p class="ttext">My daughter's confidence in Physics has improved tremendously. The teachers here genuinely care about each student's growth. Highly recommend!</p>
+        <div class="tauthor">
+          <div class="tav">S</div>
+          <div><div class="tname">Sunita Rajan</div><div class="trole">Parent of Grade 11 Student</div></div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="stars">★★★★★</div>
+        <div class="tquote">"</div>
+        <p class="ttext">The evening batch timing is perfect for working parents. My son looks forward to classes every day — his Computer Science scores have gone up significantly.</p>
+        <div class="tauthor">
+          <div class="tav">R</div>
+          <div><div class="tname">Ramesh Annamalai</div><div class="trole">Parent of Grade 12 Student</div></div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="stars">★★★★★</div>
+        <div class="tquote">"</div>
+        <p class="ttext">Ms. Thilothana is an exceptional educator. The way she explains concepts makes even difficult topics feel simple. My child's Tamil results have improved greatly.</p>
+        <div class="tauthor">
+          <div class="tav">P</div>
+          <div><div class="tname">Priya Murugan</div><div class="trole">Parent of Grade 9 Student</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="max-width:1000px;margin:0 auto">
+    <div class="sh c reveal">
+      <div class="stag">📞 Get In Touch</div>
+      <h2 class="stitle">Contact <span>Us</span></h2>
+      <div class="divider c"></div>
+      <p class="ssub">Have questions? We'd love to hear from you. Reach out anytime.</p>
+    </div>
+    <div class="con-grid reveal">
+      <div>
+        <div class="con-card">
+          <div class="con-ico">👩‍💼</div>
+          <div><div class="con-lbl">Director</div><div class="con-val">Ms. M. Thilothana</div></div>
+        </div>
+        <div class="con-card">
+          <div class="con-ico">📞</div>
+          <div><div class="con-lbl">Phone / WhatsApp</div><div class="con-val"><a href="tel:+91XXXXXXXXXX">+91 97894 11958</a></div></div>
+        </div>
+        <div class="con-card">
+          <div class="con-ico">✉️</div>
+          <div><div class="con-lbl">Email</div><div class="con-val"><a href="mailto:thilothana@gmail.com">thilothana@gmail.com</a></div></div>
+        </div>
+        <div class="con-card">
+          <div class="con-ico">📍</div>
+          <div><div class="con-lbl">Address</div><div class="con-val">Tamil Nadu, India<br><small style="color:var(--muted);font-size:.8rem">Full address shared on enrollment</small></div></div>
+        </div>
+        <div class="con-card">
+          <div class="con-ico">🕕</div>
+          <div><div class="con-lbl">Class Timings</div><div class="con-val">6:30 PM – 8:00 PM </div></div>
+        </div>
+      </div>
+      <div>
+        <div class="map-box">
+        
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.422517719638!2d80.17801877504698!3d12.620263622483735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53ab5250243c71%3A0xbb338ff75412f3f5!2sDhanalakshmi%20Srinivasan%20College%20of%20Engineering%20and%20Technology!5e0!3m2!1sen!2sin!4v1773120648584!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="con-cta">
+          <div style="font-size:1.5rem;margin-bottom:8px">💬</div>
+          <h4>Ready to Enroll?</h4>
+          <p>Secure your child's seat today — limited spots available!</p>
+          <a href="#enroll" class="btn-gold" style="font-size:.88rem;padding:10px 28px">Enroll Now →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <div class="ft-logo">
+        <div class="fli">✦</div>
+        <span>Bright Minds Tuition</span>
+      </div>
+      <p>Nurturing young minds through quality education and personalised attention. Where every student's potential is discovered and celebrated.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#staff">Our Staff</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#enroll">Enroll Now</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Courses</h4>
+      <ul>
+        <li><a href="#courses">Computer Science</a></li>
+        <li><a href="#courses">Tamil</a></li>
+        <li><a href="#courses">English</a></li>
+        <li><a href="#courses">Physics</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p>© 2025 Bright Minds Tuition. All rights reserved.</p>
+    <p style="color:var(--gold-light);opacity:1;font-size:.82rem">✦ Empowering Futures, One Student at a Time</p>
+  </div>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+
+<script>
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── SCROLL TOP ──
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 400);
+});
+
+// ── MOBILE MENU ──
+function toggleMenu() { document.getElementById('mobMenu').classList.toggle('open'); }
+function closeMenu()  { document.getElementById('mobMenu').classList.remove('open'); }
+
+// ── GOOGLE SHEETS INTEGRATION ──
+// Paste your Google Apps Script Web App URL below after setup
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz2bzh3LBtSnGCyUm_ie2T0DldSKVmgnIsjan4Ns-ulsWOvb5NEaGg24h6quCbXUPsJ6Q/exec';
+
+async function submitForm() {
+  const required = {
+    sName:    document.getElementById('sName').value.trim(),
+    sGrade:   document.getElementById('sGrade').value,
+    sSubject: document.getElementById('sSubject').value,
+    sSlot:    document.getElementById('sSlot').value,
+    pName:    document.getElementById('pName').value.trim(),
+    pPhone:   document.getElementById('pPhone').value.trim()
+  };
+
+  // Validation
+  for (const [key, val] of Object.entries(required)) {
+    if (!val) {
+      alert('⚠️ Please fill in all required fields (marked with *).');
+      return;
+    }
+  }
+
+  const btn = document.querySelector('#fSubmit button');
+  btn.textContent = '⏳ Submitting...';
+  btn.disabled = true;
+
+  const payload = {
+    studentName: required.sName,
+    dob:         document.getElementById('sDob').value,
+    grade:       required.sGrade,
+    school:      document.getElementById('sSchool').value.trim(),
+    subject:     required.sSubject,
+    timeslot:    required.sSlot,
+    parentName:  required.pName,
+    phone:       required.pPhone,
+    email:       document.getElementById('pEmail').value.trim(),
+    area:        document.getElementById('pArea').value.trim(),
+    notes:       document.getElementById('sNotes').value.trim(),
+    submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+  };
+
+  try {
+    if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbz2bzh3LBtSnGCyUm_ie2T0DldSKVmgnIsjan4Ns-ulsWOvb5NEaGg24h6quCbXUPsJ6Q/exec') {
+      // Demo mode – shows success without sending to Sheets yet
+      showSuccess(payload);
+    } else {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      showSuccess(payload);
+    }
+  } catch (err) {
+    btn.textContent = '✦ Submit Enrollment Request';
+    btn.disabled = false;
+    alert('⚠️ Something went wrong. Please try again or contact us directly.');
+  }
+}
+
+function showSuccess(d) {
+  let html = '<strong style="color:var(--teal);font-size:.9rem">📋 Enrollment Summary</strong><br><br>';
+  html += `<b>Student Name:</b> ${d.studentName}<br>`;
+  if (d.dob)    html += `<b>Date of Birth:</b> ${d.dob}<br>`;
+  html += `<b>Grade:</b> ${d.grade}<br>`;
+  if (d.school) html += `<b>School:</b> ${d.school}<br>`;
+  html += `<b>Subject:</b> ${d.subject}<br>`;
+  html += `<b>Time Slot:</b> ${d.timeslot}<br><br>`;
+  html += `<b>Parent/Guardian:</b> ${d.parentName}<br>`;
+  html += `<b>Phone:</b> ${d.phone}<br>`;
+  if (d.email)  html += `<b>Email:</b> ${d.email}<br>`;
+  if (d.area)   html += `<b>Area:</b> ${d.area}<br>`;
+  if (d.notes)  html += `<br><b>Notes:</b> ${d.notes}<br>`;
+  html += `<br><span style="color:var(--muted);font-size:.8rem">🕐 Submitted: ${d.submittedAt}</span>`;
+
+  document.getElementById('summaryBox').innerHTML = html;
+  document.getElementById('fgrid').style.display = 'none';
+  document.getElementById('fSubmit').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+  document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetForm() {
+  // Reset all inputs
+  ['sName','sDob','sSchool','pName','pPhone','pEmail','pArea','sNotes'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  ['sGrade','sSubject','sSlot'].forEach(id => {
+    document.getElementById(id).selectedIndex = 0;
+  });
+
+  // Reset button
+  const btn = document.querySelector('#fSubmit button');
+  btn.textContent = '✦ Submit Enrollment Request';
+  btn.disabled = false;
+
+  // Show form, hide success
+  document.getElementById('fgrid').style.display = 'grid';
+  document.getElementById('fSubmit').style.display = 'block';
+  document.getElementById('successMsg').style.display = 'none';
+
+  // Scroll back to form
+  document.getElementById('enroll').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
